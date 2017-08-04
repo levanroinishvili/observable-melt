@@ -1,0 +1,30 @@
+{
+  "name": "observable-melt",
+  "version": "1.0.0",
+  "description": "Convert cold observables into hot - like .publish()",
+  "main": "index.js",
+  "scripts": {
+    "test": "demo.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/levanroinishvili/observable-melt.git"
+  },
+  "keywords": [
+    "Observable",
+    "Melt",
+    "Publish"
+  ],
+  "author": "Levan Roinishvili",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/levanroinishvili/observable-melt/issues"
+  },
+  "homepage": "https://github.com/levanroinishvili/observable-melt#readme",
+  "dependencies": {
+    "rxjs": "^5.4.2"
+  },
+  "devDependencies": {
+    "chalk": "^2.0.1"
+  }
+}
