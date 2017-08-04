@@ -6,7 +6,7 @@ by using an extra `connect()` method, to avoid some [tricky situations](#differe
 
 `melt()` does not rely on `publish()` in any way.
 
-`publish()` and `connect()` work together well. This piece of code was made just out of interest, as a fun exercise.
+**Note**: `publish()` and `connect()` work together well. This piece of code was made just out of interest, on Friday evening.
 
 * [Cold vs Hot Observables](#cold-vs-hot-observables)
 * [Why Convert Cold to Hot](#why-convert-cold-to-hot)
