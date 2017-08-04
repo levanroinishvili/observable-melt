@@ -4,7 +4,24 @@ This adds `melt()` method to Microsoft's [RxJS](http://reactivex.io/) library. `
 This is similar to `publish()` method, included in the RxJS.
 
 ### Cold vs Hot Observables
-Cold observables do not emit values until subscribed. They are also re-created for each subscription.
+Here is a non-technical - and thus somewhat imprecise - description of hot and cold observables.
+
+**Hot observables** can be though of as existing independently from subscriptions.
+If one observers subscribes later than others, it will 'miss' values emitted before its subscription.
+
+**Cold observables**, on the other hand, do not emit values until subscribed. They are 're-created' for each subscription,
+which means they will always re-start from the same initial value. Hot observables are usually bound to 'natural' events,
+like mouse clicks. For example:
+``` JavaScript
+Rx.Observable.fromEvent(button,'click');  // Emits click events at every click
+```
+
+Cold observables are 'artificially' created and not bound to 'natural' events. For example:
+``` JavaScript
+Rx.Observable.of(1,2,3);        // Emit three values: 1,2 and 3
+Rx.Observable.interval(1000);   // Emit incremental values each second
+```
+
 (Read [more](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/gettingstarted/creating.md))
 
 ## Installation and usage
