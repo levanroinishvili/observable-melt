@@ -127,10 +127,12 @@ let source = Rx.Observable
                .publish()
                .subscribe(console.log);
 ```
-The second use is trickier to implement internally. As soon as `publish()` subscribes to the source observable `.of(0,1,2,3,4,5)`,
-it will immediately emit all values and complete. Only then the method `.subscribe()` will fire, but will not observe any
-values. To solve this problem, `publish()` does not automatically subscribe to the source observable. Instead, the source is
-activated by a separate call to `connect()`. By separating subscription to the source from subscription to the 'children',
-the tricky situation is avoided.
+If `publish()` tried to automatically subscribe to the source observable, the second use would be trickier to implement internally.
+As soon as `publish()` subscribed to the source observable `.of(0,1,2,3,4,5)`,
+it would immediately and synchronously emit all values and complete. Only then the method `.subscribe()`
+would fire, but not observe any values. To solve this problem, `publish()` does not automatically subscribe to the source observable.
+Instead, the source is activated by a separate call to `connect()`.
+
+By separating subscription to the source from own subscriptions, the tricky situation is avoided.
 
 `melt()` will handle such cases correctly. That is, subscribed observers will receive all expected values.
