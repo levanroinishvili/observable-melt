@@ -2,10 +2,10 @@
 
 This adds `melt()` method to Microsoft's [RxJS](http://reactivex.io/) library. `melt()` converts a cold observable to a hot observable.
 This is similar to `publish()` method, included in the RxJS.
-(Read [more](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/gettingstarted/creating.md))
 
 ### Cold vs Hot Observables
 Cold observables do not emit values until subscribed. They are also re-created for each subscription.
+(Read [more](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/gettingstarted/creating.md))
 
 ## Installation and usage
 The following assumes you have `node.js` installed with `npm` package manager.
@@ -13,6 +13,9 @@ The following assumes you have `node.js` installed with `npm` package manager.
 git clone https://github.com/levanroinishvili/observable-melt.git observable-melt
 cd observable-melt
 npm install
+
+// Then, inside a file
+const Rx = require('./index');
 
 Rx.Observable
   .interval(1000)
@@ -36,6 +39,8 @@ This issue can be solved by the `publish()` method, included in the RxJS. And, i
 my `melt()` method
 
 ### Examples
+From `node.js` you can run `demo.js` for a small demonstration.
+
 ``` JavaScript
 let source = Rx.Observable
               .interval(1000) // Emit values every second
