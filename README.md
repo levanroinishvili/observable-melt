@@ -1,12 +1,12 @@
 # observable-melt
 
 This code adds the `melt()` method to Microsoft's [RxJS](http://reactivex.io/) library. `melt()` converts a **cold observable** to a **hot observable**. It is somewhat similar to the `publish()` method, already included in RxJS. The difference is that `melt()`
-can automatically subscribe and unsubscribe to the source as needed and will do so correctly. `publish()` solves a similar challenge
+can automatically subscribe and unsubscribe to the source as needed and do so correctly. `publish()` solves a similar challenge
 by using an extra `connect()` method, to avoid some [tricky situations](#difference-between-publish-and-melt).
 
-`melt()` does not rely on `publish()` in any way.
+`melt()` is not a wrap-around of `publish()`, neither does it rely on `publish()` in any way.
 
-**Note**: `publish()` and `connect()` work together well. This piece of code was made just out of interest, on Friday evening.
+**Note**: `publish()` and `connect()` work together well. This piece of code was made just out of interest, on a fine Friday evening.
 
 * [Cold vs Hot Observables](#cold-vs-hot-observables)
 * [Why Convert Cold to Hot](#why-convert-cold-to-hot)
@@ -47,14 +47,14 @@ Rx.Observable.interval(1000);   // Emit incremental values each second
 (Read [more](https://github.com/Reactive-Extensions/RxJS/blob/master/doc/gettingstarted/creating.md))
 
 ## Why Convert Cold to Hot
-Sometimes it is desirable to convert a cold observable to a hot one. For example, if we want to implement a ticker,
+Even in the world of observables it is sometimes desirable to heat things up a bit. For example, if we want to implement a ticker,
 which should get data from a remote server once a minute. If five observers were to subscribe to the underlying observable,
 we would not want the remote server to be queried five times a minute. Yet this is precisely what would happen if the
-observable is implemented, say, with `Observable.create()` without deliberatly 'protecting' the source from being
-'re-created' on each subscription.
+observable is implemented, say, with `Observable.create()` without deliberately 'protecting' the source from being
+multiple subscriptions.
 
 The `publish()` method, and of course now the `melt()` method, represent that deliberate 'protection' of the source.
-They both return a surrogate observable, which itself subscribes to the underlying source only once and then propagates events
+They both return a surrogate observable, which itself subscribes to the underlying source only once, and then propagates events
 down to its own subscribers.
 
 ## Acquisition and usage
@@ -71,7 +71,7 @@ Rx.Observable
   .interval(1000)
   .melt(startImediate,persistent);
 ```
-* startImediate : if true, immediately subscribe to the source observable. Otherwsie,
+* startImediate : if true, immediately subscribe to the source observable. Otherwise,
 subscribe to source as necessary. Defaults to `false`.
 * persistent    : if true, do not automatically unsubscribe from source, when all children unsubscribe.
 Defaults to `false`.
